@@ -26,7 +26,7 @@
               @click="hideMenu"
             >
               <nuxt-link to="/">
-                <font-awesome-icon :icon="['fas', 'pen-nib']" />博客
+                <font-awesome-icon :icon="['fas', 'pen-nib']" />Sharing
               </nuxt-link>
               <div class="nav-line" />
             </li>

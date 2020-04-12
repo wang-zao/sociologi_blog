@@ -1,7 +1,7 @@
 <template>
   <div class="widget-container">
     <div class="widget-header">
-      博客简介bubububu
+      社系田野工作坊
     </div>
     <div class="widget-body">
       <template v-if="intro">

@@ -1,7 +1,7 @@
 <template>
   <div class="widget-container">
     <div class="widget-header">
-      热门标签
+      研究领域
     </div>
     <div class="widget-body">
       <a-spin :spinning="spinning" />

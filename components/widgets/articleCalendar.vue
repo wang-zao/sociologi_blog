@@ -1,7 +1,7 @@
 <template>
   <div class="widget-container">
     <div class="widget-header">
-      博客日历
+      田野日历
     </div>
     <a-calendar
       :fullscreen="false"

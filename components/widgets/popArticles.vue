@@ -1,7 +1,7 @@
 <template>
   <div class="widget-container">
     <div class="widget-header">
-      热门文章
+      热门田野
     </div>
     <div class="widget-body">
       <a-spin :spinning="spinning" />

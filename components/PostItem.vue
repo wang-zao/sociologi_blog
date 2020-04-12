@@ -1,20 +1,23 @@
 <template>
-  <a-card hoverable class="blog-item" style="width: 300px">
+  <a-card hoverable :loading="loading" class="blog-item">
+    <!--
     <img
-      alt="example"
-      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+      alt="example" class="title-image"
+      src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Sendai_City_Panorama_from_Site_of_Sendai_Castle_Keep_Tower_Base_2010-05-31_cropped-3.jpg"
       slot="cover"
     />
-    <div class="item-header">
-      {{ publishDate }}
-    </div>
+    -->
     <template v-if="!post.isLocal">
-      <h4>
+      <div class="preview-content">{{ post.content }}</div>
+      <h4 class="card-title">
         <a :title="post.title" :href="post.url" target="_blank">
           <web-font icon="external-link" style="margin-right: 5px;" />
           <span>{{ post.title }}</span>
         </a>
       </h4>
+      <div class="item-header">
+        {{ publishDate }}
+      </div>
       <div class="item-footer2">
         <nuxt-link :to="post.category.alias ? `/blog/${post.category.alias}` : '/'" exact active-class="active" :title="`分类: ${post.category.cateName}`">
           <img :src="post.category.img">
@@ -35,16 +38,22 @@
         title="点击预览"
         @click="() => (drawer = true)"
       />
-      <h4>
+      <div class="preview-content">{{ post.content }}</div>
+      <h4 class="card-title">
         <nuxt-link :to="`/blog/${post.category.alias}/${post.alias}`" :title="post.title">
           {{ post.title }}
         </nuxt-link>
       </h4>
+      <div class="item-header">
+        {{ publishDate }}
+      </div>
       <div class="item-footer1">
+        <!--
         <nuxt-link :to="post.category.alias ? `/blog/${post.category.alias}` : '/'" exact active-class="active" :title="`分类: ${post.category.cateName}`">
           <img :src="post.category.img">
           {{ post.category.cateName }}
         </nuxt-link>
+        -->
         <span :title="`浏览数: ${post.viewCount}`">
           <font-awesome-icon :icon="['far', 'eye']" />
           {{ post.viewCount }}
@@ -52,6 +61,15 @@
         <span :title="`评论数: ${post.comments.length}`">
           <font-awesome-icon :icon="['fas', 'comments']" />
           {{ post.comments.length }}
+        </span>
+        <span class="preview-link">
+          <a
+            v-if="settings.enablePreview"
+            class="preview-link"
+            @click="() => (drawer = true)"
+          >
+            速览
+          </a>
         </span>
       </div>
     </template>
@@ -102,6 +120,7 @@ export default Vue.extend({
   data () {
     return {
       settings: this.$store.state.settings,
+      loading: false,
       drawer: false,
       publishDate: moment(this.post.publishTime).format('YYYY/MM/DD')
     };
@@ -110,28 +129,45 @@ export default Vue.extend({
     displayUrl (link) {
       const url = new URL(link);
       return url.hostname;
-    },
+    },  
     redirectUrl (link) {
       const url = new URL(link);
       return url.origin;
-    }
+    },
   }
 });
 </script>
 <style scoped>
 .blog-item {
   position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(to right, rgb(231, 250, 255) , rgb(255, 255, 235));
 }
-
-.preview-link {
-  display: block;
-  cursor: alias;
-  height: 100%;
-  left: 0;
+.title-image {
   position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 1;
+  margin-bottom: -15vh;
+}
+.preview-content{
+  height: 7vh !important;
+  line-height: 3.5vh;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color: rgb(186, 186, 186);
+}
+.card-title {
+  margin-top: 1.5vh;
+}
+.hr-line-dashed {
+  margin: 0 0 0 0 !important;
+}
+.preview-link {
+  height: 100%;
+  float: right;
+  margin-right: 0px !important;
+  color: #2d8cf0 !important;
+}
+.preview-link :hover {
+  color: #89c2ff !important;
 }
 
 .blog-item h4 {

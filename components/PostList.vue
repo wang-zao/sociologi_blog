@@ -190,6 +190,8 @@ export default Vue.extend({
   created () {
     this.isLoading = true;
     this.getPosts();
+    console.log('postshere');
+    console.log(this.posts);
   },
   methods: {
     disabledDate (date) {
@@ -284,6 +286,9 @@ export default Vue.extend({
 .post-item-frames {
   vertical-align: top;
   display: inline-block;
+  width: 95% ;
+  height: 27vh !important;
+  margin: 2.5% 0.5% 0 2.5%;
 }
 .post-wrap {
   padding: 25px 20px 0 265px;
@@ -320,7 +325,7 @@ export default Vue.extend({
 }
 
 .post-list {
-  background: #fff;
+  background-color: #ececec;
   min-height: 100%;
   padding: 20px 20px 0;
   margin-bottom: 0;
